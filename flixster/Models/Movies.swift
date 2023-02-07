@@ -7,22 +7,39 @@
 
 import Foundation
 
+//struct MoviesResponse: Decodable {
+//    var results: [Movie]
+//
+//    static func loadJson() -> [Movie] {
+//        if let url = Bundle.main.url(forResource: "data", withExtension: "json") {
+//            do {
+//                let data = try Data(contentsOf: url)
+//                let decoder = JSONDecoder()
+//                let jsonData = try decoder.decode(MoviesResponse.self, from: data)
+//                return jsonData.results
+//            } catch {
+//                print("error:\(error)")
+//            }
+//        }
+//        return []
+//    }
+//}
+
 struct MoviesResponse: Decodable {
     var results: [Movie]
-    
     static func loadJson() -> [Movie] {
-        if let url = Bundle.main.url(forResource: "data", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let jsonData = try decoder.decode(MoviesResponse.self, from: data)
-                return jsonData.results
-            } catch {
-                print("error:\(error)")
+            if let url = Bundle.main.url(forResource: "data", withExtension: "json") {
+                do {
+                    let data = try Data(contentsOf: url)
+                    let decoder = JSONDecoder()
+                    let jsonData = try decoder.decode(MoviesResponse.self, from: data)
+                    return jsonData.results
+                } catch {
+                    print("error:\(error)")
+                }
             }
+            return []
         }
-        return []
-    }
 }
 
 struct Movie: Decodable {
@@ -36,5 +53,7 @@ struct Movie: Decodable {
     var vote_count: Int
     var popularity: Double
 }
+
+
 
 
